@@ -24,7 +24,22 @@ export class PacientService {
         return this.http.get<Pacient[]>(this.apiUrl);
     }
 
+    getPacientByDni(dni: string): Observable<Pacient> {
+        const url = `${this.apiUrl}/${dni}`;
+        return this.http.get<Pacient>(url);
+    }
+
     createPacient(pacient: Pacient): Observable<Pacient> {
         return this.http.post<Pacient>(this.apiUrl, pacient);
+    }
+
+    updatePacient(dni: string, pacient: Pacient): Observable<Pacient> {
+        const url = `${this.apiUrl}/${dni}`;
+        return this.http.put<Pacient>(url, pacient);
+    }
+
+    deletePacient(dni: string): Observable<void> {
+        const url = `${this.apiUrl}/${dni}`;
+        return this.http.delete<void>(url);
     }
 }
