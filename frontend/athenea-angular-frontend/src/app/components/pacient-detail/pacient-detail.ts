@@ -51,6 +51,7 @@ export class PacientDetail implements OnInit {
       this.pacientService.updatePacient(this.pacient.dni, this.pacient).subscribe({
         next: (updated) => {
           this.pacient = updated;
+          console.log('Pacient updated:', updated);
           alert('Pacient actualitzat correctament');
 
           this.router.navigate(['/']);
