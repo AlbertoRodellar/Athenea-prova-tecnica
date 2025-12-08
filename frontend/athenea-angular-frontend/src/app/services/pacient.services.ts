@@ -38,8 +38,8 @@ export class PacientService {
         return this.http.put<Pacient>(url, pacient);
     }
 
-    deletePacient(dni: string): Observable<void> {
-        const url = `${this.apiUrl}/${dni}`;
-        return this.http.delete<void>(url);
-    }
+    // deletePacient(dni: string): Observable<void> {
+    //     const url = `${this.apiUrl}/${dni}`;
+    //     return this.http.delete<void>(url);
+    // }
 }

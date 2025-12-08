@@ -17,7 +17,7 @@ export class PacientDetail implements OnInit {
   constructor(
     private pacientService: PacientService,
     private route: ActivatedRoute,
-    private cd: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
     private router: Router
   ) {}
 
@@ -34,10 +34,10 @@ export class PacientDetail implements OnInit {
     this.loading = true;
     this.pacientService.getPacientByDni(dni).subscribe({
       next: (data) => {
-        console.log(data);
+        console.log('Details:', data);
         this.pacient = data;
         this.loading = false;
-        this.cd.detectChanges();
+        this.cdr.detectChanges();
       },
       error: () => {
         this.loading = false;
