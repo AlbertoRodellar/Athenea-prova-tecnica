@@ -20,7 +20,7 @@ class PacientFactory extends Factory
             'dni' => strtoupper($this->faker->unique()->bothify('########?')), 
             'nom' => $this->faker->firstName(),
             'cognoms' => $this->faker->lastName(),
-            'dataNaixement' => $this->faker->date('d-m-Y', '2005-01-01'),
+            'dataNaixement' => $this->faker->date('Y-m-d', '2005-01-01'),
             'poblacio' => $this->faker->city(),
             'cip' => strtoupper($this->faker->unique()->bothify('?########?'))
         ];

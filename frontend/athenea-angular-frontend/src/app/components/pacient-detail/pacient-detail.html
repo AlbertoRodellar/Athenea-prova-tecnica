@@ -1,0 +1,32 @@
+<div *ngIf="loading">Carregant detalls del pacient...</div>
+
+<div *ngIf="!loading && pacient">
+    <h2>Editar pacient amb DNI: {{ pacient.dni }}</h2>
+    <form (ngSubmit)="updatePacient()" #patientForm="ngForm">
+        <label>Nom:
+            <input name="nom" [(ngModel)]="pacient.nom" required />
+        </label><br/>
+
+        <label>Cognoms:
+            <input name="cognoms" [(ngModel)]="pacient.cognoms" required />
+        </label><br/>
+
+        <label>Data Naixement:
+            <input name="dataNaixement" [(ngModel)]="pacient.dataNaixement" required type="date" />
+        </label><br/>
+
+        <label>Població:
+            <input name="poblacio" [(ngModel)]="pacient.poblacio" required />
+        </label><br/>
+
+        <label>CIP:
+            <input name="cip" [(ngModel)]="pacient.cip" required />
+        </label><br/>
+
+        <button type="submit" [disabled]="patientForm.invalid">Guardar</button>
+    </form>
+</div>
+
+<div *ngIf="!loading && !pacient">
+    <p>Pacient no trobat.</p> 
+</div>

@@ -1,0 +1,39 @@
+<div *ngIf="loading">Carregant pacients...</div>
+<div *ngIf="!loading">
+    <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                <th>DNI</th>
+                <th>Nom</th>
+                <th>Cognoms</th>
+                <th>Data Naixement</th>
+                <th>Població</th>
+                <th>CIP</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pacient of pacients()" [routerLink]="['/pacients', pacient.dni]" style="cursor: pointer;">
+                <td>{{ pacient.dni }}</td>
+                <td>{{ pacient.nom }}</td>
+                <td>{{ pacient.cognoms }}</td>
+                <td>{{ pacient.dataNaixement }}</td>
+                <td>{{ pacient.poblacio }}</td>
+                <td>{{ pacient.cip }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<form (ngSubmit)="addPacient()">
+    <input [(ngModel)]="newPacient.dni" name="dni" placeholder="DNI" required />
+    <input [(ngModel)]="newPacient.nom" name="nom" placeholder="Nom" required />
+    <input [(ngModel)]="newPacient.cognoms" name="cognoms" placeholder="Cognoms" required />
+    <input [(ngModel)]="newPacient.dataNaixement" name="dataNaixement" placeholder="Data Naixement" required type="date" />
+    <input [(ngModel)]="newPacient.poblacio" name="poblacio" placeholder="Població" required />
+    <input [(ngModel)]="newPacient.cip" name="cip" placeholder="CIP" required />
+    <button type="submit">Afegir Pacient</button>
+</form>
+
+<div *ngIf="formMessage" class="form-message">
+    {{ formMessage }}
+</div>

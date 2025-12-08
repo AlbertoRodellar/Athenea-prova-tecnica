@@ -1,4 +1,4 @@
-# Laravel Framework
+# Laravel
 /vendor/
 /node_modules/
 /public/hot
@@ -11,8 +11,23 @@
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
-/.idea
-/.vscode
+npm-debug.log*
+yarn-error.log*
+
+# Angular
+/dist/
+/out-tsc/
+
+# Node modules
+/node_modules/
+
+# IDE/editor configs
+/.vscode/
+/.idea/
+
+# MacOS
 .DS_Store
+
+# Logs
+npm-debug.log*
+yarn-error.log*
