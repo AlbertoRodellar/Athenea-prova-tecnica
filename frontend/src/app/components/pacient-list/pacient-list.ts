@@ -4,10 +4,13 @@ import { PacientService, Pacient } from '../../services/pacient.services';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { IonContent, IonToast, IonButton } from '@ionic/angular/standalone';
+
+
 
 @Component({
   selector: 'app-pacient-list',
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule, IonContent, IonToast, IonButton],
   templateUrl: './pacient-list.html',
   styleUrl: './pacient-list.css',
 })
@@ -30,7 +33,9 @@ export class PacientList implements OnInit {
     });
   }
   
-  formMessage: string = '';
+  toastMessage = signal<string>('');
+  toastOpen = signal<boolean>(false);
+
   newPacient: Pacient = {
       dni: '',
       nom: '',
@@ -44,13 +49,15 @@ export class PacientList implements OnInit {
       this.pacientService.createPacient(this.newPacient as Pacient).subscribe({
         next: (createdPacient: Pacient) => {
           console.log('Pacient created:', createdPacient);
-          this.formMessage = 'Pacient amb DNI: ' + createdPacient.dni + ' creat correctament!';
+          this.toastMessage.set('Pacient amb DNI: ' + createdPacient.dni + ' creat correctament!');
+          this.toastOpen.set(true);
           this.pacients.update(pacients => [...pacients, createdPacient]);
           this.resetForm();
           this.cdr.detectChanges();
         },
         error: (error) => {
-          this.formMessage = 'Error creant el pacient.';
+          this.toastMessage.set('Error creant el pacient.');
+          this.toastOpen.set(true);
           console.error('Error creating pacient:', error);
           this.cdr.detectChanges();
         }

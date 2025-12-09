@@ -1,12 +1,15 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { Pacient, PacientService } from '../../services/pacient.services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { IonContent, IonToast, IonButton, IonInput, IonItem, IonList } from '@ionic/angular/standalone';
+
+
 @Component({
   selector: 'app-pacient-detail',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IonContent, IonToast, IonButton, IonInput, IonItem, IonList],
   templateUrl: './pacient-detail.html',
   styleUrl: './pacient-detail.css',
 })
@@ -46,19 +49,26 @@ export class PacientDetail implements OnInit {
     });
   }
 
+  toastMessage = signal<string>('');
+  toastOpen = signal<boolean>(false);
+
   updatePacient() {
     if (this.pacient) {
       this.pacientService.updatePacient(this.pacient.dni, this.pacient).subscribe({
         next: (updated) => {
           this.pacient = updated;
           console.log('Pacient updated:', updated);
-          alert('Pacient actualitzat correctament');
-
-          this.router.navigate(['/']);
+          this.toastMessage.set('Pacient amb DNI: ' + this.pacient.dni + ' actualitzat correctament!');
+          this.toastOpen.set(true);
+          
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 1000);
         },
         error: (err) => {
           console.error('Error actualitzant el pacient:', err);
-          alert('Error actualitzant el pacient');
+          this.toastMessage.set('Error actualitzant el pacient');
+          this.toastOpen.set(true);
         }
       });
     }
