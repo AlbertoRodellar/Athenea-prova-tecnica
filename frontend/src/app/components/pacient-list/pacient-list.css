@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    gap: 32px;
+}
+
+.table-container {
+    flex: 2;
+    overflow-x: auto;
+    
+    table{
+        width: 100%;
+    }
+}
+
+.form-container {
+    flex: 1;
+}
+
+@media (max-width: 980px) {
+    .container {
+        flex-direction: column;
+    }
+}

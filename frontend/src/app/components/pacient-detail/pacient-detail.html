@@ -3,8 +3,7 @@
 <div *ngIf="!loading && pacient">
     <h2>Editar pacient amb DNI: {{ pacient.dni }}</h2>
     <form (ngSubmit)="updatePacient()" #patientForm="ngForm">
-        <ion-list>
-
+    <ion-list>
         <ion-item>
             <ion-input
             label="Nom"
