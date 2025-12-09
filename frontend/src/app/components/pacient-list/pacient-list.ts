@@ -4,13 +4,13 @@ import { PacientService, Pacient } from '../../services/pacient.services';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { IonContent, IonToast, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonToast, IonButton, IonList, IonItem, IonInput, IonDatetime, IonLabel, IonDatetimeButton, IonModal } from '@ionic/angular/standalone';
 
 
 
 @Component({
   selector: 'app-pacient-list',
-  imports: [RouterLink, CommonModule, FormsModule, IonContent, IonToast, IonButton],
+  imports: [RouterLink, CommonModule, FormsModule, IonContent, IonToast, IonButton, IonList, IonItem, IonInput, IonDatetime, IonLabel, IonDatetimeButton, IonModal],
   templateUrl: './pacient-list.html',
   styleUrl: './pacient-list.css',
 })
@@ -35,6 +35,7 @@ export class PacientList implements OnInit {
   
   toastMessage = signal<string>('');
   toastOpen = signal<boolean>(false);
+  isModalOpen = false;
 
   newPacient: Pacient = {
       dni: '',
