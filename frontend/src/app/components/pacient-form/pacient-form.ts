@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Pacient, PacientService } from '../../services/pacient.services';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
-import { IonContent, IonToast, IonButton, IonList, IonItem, IonInput, IonDatetime, IonLabel } from '@ionic/angular/standalone';
+import { IonButton, IonList, IonItem, IonInput, IonDatetime, IonLabel } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-pacient-form',
@@ -19,7 +19,8 @@ export class PacientForm {
     poblacio: '',
     cip: ''
   };
-
+  @ViewChild('addForm') addForm!: NgForm;
+  
   @Output() pacientCreated = new EventEmitter<Pacient>();
   @Output() pacientCreateError = new EventEmitter<string>();
 
@@ -54,5 +55,8 @@ export class PacientForm {
       poblacio: '',
       cip: ''
     };
+    if (this.addForm) {
+      this.addForm.resetForm();
+    }
   }
 }
