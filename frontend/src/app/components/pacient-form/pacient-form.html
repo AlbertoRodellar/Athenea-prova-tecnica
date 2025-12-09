@@ -1,0 +1,77 @@
+<form (ngSubmit)="addPacient()" #addForm="ngForm">
+    <ion-list>
+        <ion-item>
+            <ion-input
+                label="DNI"
+                labelPlacement="floating"
+                name="dni"
+                [(ngModel)]="newPacient.dni"
+                required
+            ></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input
+                label="Nom"
+                labelPlacement="floating"
+                name="nom"
+                [(ngModel)]="newPacient.nom"
+                required
+            ></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input
+                label="Cognoms"
+                labelPlacement="floating"
+                name="cognoms"
+                [(ngModel)]="newPacient.cognoms"
+                required
+            ></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="fixed">Data Naixement</ion-label>
+            <ion-datetime
+                name="dataNaixement"
+                [(ngModel)]="newPacient.dataNaixement"
+                presentation="date"
+                displayFormat="YYYY-MM-DD"
+                pickerFormat="YYYY-MM-DD"
+                max="2025-12-10T23:59:59">
+                required
+            ></ion-datetime>
+        </ion-item>
+
+
+        <ion-item>
+            <ion-input
+                label="Població"
+                labelPlacement="floating"
+                name="poblacio"
+                [(ngModel)]="newPacient.poblacio"
+                required
+            ></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-input
+                label="CIP"
+                labelPlacement="floating"
+                name="cip"
+                [(ngModel)]="newPacient.cip"
+                required
+            ></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="addForm.invalid"
+        class="ion-margin-top"
+    >
+        Afegir Pacient
+    </ion-button>
+</form>

@@ -1,109 +1,41 @@
 <div *ngIf="loading">Carregant pacients...</div>
 
-<div *ngIf="!loading"> 
-    <table border="1" cellpadding="5">
-        <thead>
-            <tr>
-                <th>DNI</th>
-                <th>Nom</th>
-                <th>Cognoms</th>
-                <th>Data Naixement</th>
-                <th>Població</th>
-                <th>CIP</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let pacient of pacients()" [routerLink]="['/pacients', pacient.dni]" style="cursor: pointer;">
-                <td>{{ pacient.dni }}</td>
-                <td>{{ pacient.nom }}</td>
-                <td>{{ pacient.cognoms }}</td>
-                <td>{{ pacient.dataNaixement }}</td>
-                <td>{{ pacient.poblacio }}</td>
-                <td>{{ pacient.cip }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div *ngIf="!loading" class="container">
+    <div class="table-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nom</th>
+                    <th>Cognoms</th>
+                    <th>Data Naixement</th>
+                    <th>Població</th>
+                    <th>CIP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pacient of pacients()" [routerLink]="['/pacients', pacient.dni]" style="cursor: pointer;">
+                    <td>{{ pacient.dni }}</td>
+                    <td>{{ pacient.nom }}</td>
+                    <td>{{ pacient.cognoms }}</td>
+                    <td>{{ pacient.dataNaixement }}</td>
+                    <td>{{ pacient.poblacio }}</td>
+                    <td>{{ pacient.cip }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-container">
+        <app-pacient-form
+        (pacientCreated)="onPacientCreated($event)"
+        (pacientCreateError)="onPacientCreateError($event)"
+        ></app-pacient-form>
+    </div>
 </div>
-<br>
-<form (ngSubmit)="addPacient()" #addForm="ngForm">
-    <ion-list>
-        <ion-item>
-            <ion-input
-                label="DNI"
-                labelPlacement="floating"
-                name="dni"
-                [(ngModel)]="newPacient.dni"
-                required
-            ></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input
-                label="Nom"
-                labelPlacement="floating"
-                name="nom"
-                [(ngModel)]="newPacient.nom"
-                required
-            ></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input
-                label="Cognoms"
-                labelPlacement="floating"
-                name="cognoms"
-                [(ngModel)]="newPacient.cognoms"
-                required
-            ></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label position="fixed">Data Naixement</ion-label>
-            <ion-datetime
-                name="dataNaixement"
-                [(ngModel)]="newPacient.dataNaixement"
-                presentation="date"
-                max="2025-12-10T23:59:59">
-                required
-            ></ion-datetime>
-        </ion-item>
-
-
-        <ion-item>
-            <ion-input
-                label="Població"
-                labelPlacement="floating"
-                name="poblacio"
-                [(ngModel)]="newPacient.poblacio"
-                required
-            ></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input
-                label="CIP"
-                labelPlacement="floating"
-                name="cip"
-                [(ngModel)]="newPacient.cip"
-                required
-            ></ion-input>
-        </ion-item>
-
-    </ion-list>
-
-    <ion-button
-        expand="block"
-        type="submit"
-        [disabled]="addForm.invalid"
-        class="ion-margin-top"
-    >
-        Afegir Pacient
-    </ion-button>
-</form>
-<ion-content class="ion-padding">
-    <ion-toast
-        [isOpen]="toastOpen()"
+    
+<ion-toast
+        [isOpen]="isToastOpen"
         [message]="toastMessage()"
         [duration]="5000"
-    />
-</ion-content>
+        (ionToastDidDismiss)="setOpen(false)"
+/>
