@@ -1,15 +1,14 @@
 import { Component, signal, OnInit, ChangeDetectorRef } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { PacientService, Pacient } from '../../services/pacient.services';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PacientForm } from '../pacient-form/pacient-form';
-import { IonToast, IonList, IonItem, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
+import { IonToast, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-pacient-list',
-  imports: [RouterLink, CommonModule, FormsModule, PacientForm, IonToast, IonList, IonItem, IonGrid, IonRow, IonCol],
+  imports: [ CommonModule, FormsModule, PacientForm, IonToast, IonGrid, IonRow, IonCol],
   templateUrl: './pacient-list.html',
   styleUrl: './pacient-list.css',
 })

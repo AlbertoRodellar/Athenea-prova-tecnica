@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { IonContent, IonToast, IonButton, IonInput, IonItem, IonList } from '@ionic/angular/standalone';
+import { IonToast, IonButton, IonInput, IonItem, IonList } from '@ionic/angular/standalone';
 
 
 @Component({
   selector: 'app-pacient-detail',
-  imports: [CommonModule, FormsModule, IonContent, IonToast, IonButton, IonInput, IonItem, IonList],
+  imports: [CommonModule, FormsModule, IonToast, IonButton, IonInput, IonItem, IonList],
   templateUrl: './pacient-detail.html',
   styleUrl: './pacient-detail.css',
 })

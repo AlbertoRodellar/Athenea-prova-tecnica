@@ -16,7 +16,6 @@
 
         <ion-row *ngFor="let pacient of pacients()" 
                 (click)="goToPacient(pacient.dni)" 
-                style="cursor: pointer;" 
                 class="table-pacient-row">
         
             <ion-col size="2">{{ pacient.dni }}</ion-col>
