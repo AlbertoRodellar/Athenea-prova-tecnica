@@ -20,7 +20,7 @@ Sigue estos pasos para configurar y ejecutar la aplicación en tu entorno local.
 1.  **Clonar el repositorio:**
 
     ```bash
-    git clone [https://github.com/AlbertoRodellar/Athenea-prova-tecnica](https://github.com/AlbertoRodellar/Athenea-prova-tecnica)
+    git clone https://github.com/AlbertoRodellar/Athenea-prova-tecnica
     cd Athenea-prova-tecnica
     ```
 
