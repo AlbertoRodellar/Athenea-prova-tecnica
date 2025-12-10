@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { IonContent, IonToast, IonButton, IonInput, IonItem, IonList } from '@ionic/angular/standalone';
+import { IonToast, IonButton, IonInput, IonItem, IonList } from '@ionic/angular/standalone';
 
 
 @Component({
   selector: 'app-pacient-detail',
-  imports: [CommonModule, FormsModule, IonContent, IonToast, IonButton, IonInput, IonItem, IonList],
+  imports: [CommonModule, FormsModule, IonToast, IonButton, IonInput, IonItem, IonList],
   templateUrl: './pacient-detail.html',
   styleUrl: './pacient-detail.css',
 })
@@ -50,7 +50,11 @@ export class PacientDetail implements OnInit {
   }
 
   toastMessage = signal<string>('');
-  toastOpen = signal<boolean>(false);
+  isToastOpen = false;
+
+  setOpen(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
 
   updatePacient() {
     if (this.pacient) {
@@ -59,16 +63,41 @@ export class PacientDetail implements OnInit {
           this.pacient = updated;
           console.log('Pacient updated:', updated);
           this.toastMessage.set('Pacient amb DNI: ' + this.pacient.dni + ' actualitzat correctament!');
-          this.toastOpen.set(true);
+          this.setOpen(true);
           
           setTimeout(() => {
-            this.router.navigate(['/']);
+            this.goBack();
           }, 1000);
         },
         error: (err) => {
           console.error('Error actualitzant el pacient:', err);
           this.toastMessage.set('Error actualitzant el pacient');
-          this.toastOpen.set(true);
+          this.setOpen(true);
+        }
+      });
+    }
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
+  }
+
+  deletePacient() {
+    if (this.pacient) {
+      this.pacientService.deletePacient(this.pacient.dni).subscribe({
+        next: () => {
+          console.log('Pacient deleted');
+          this.toastMessage.set('Pacient amb DNI: ' + this.pacient!.dni + ' eliminat correctament!');
+          this.setOpen(true);
+          setTimeout(() => {
+            this.goBack();
+          }, 1000);
+        }
+        ,
+        error: (err) => {
+          console.error('Error eliminant el pacient:', err);
+          this.toastMessage.set('Error eliminant el pacient');
+          this.setOpen(true);
         }
       });
     }

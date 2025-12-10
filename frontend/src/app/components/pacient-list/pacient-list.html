@@ -1,41 +1,44 @@
-<div *ngIf="loading">Carregant pacients...</div>
+<div *ngIf="loading" class="ion-padding ion-text-center">
+    Carregant pacients...
+</div>
 
-<div *ngIf="!loading" class="container">
-    <div class="table-container">
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>DNI</th>
-                    <th>Nom</th>
-                    <th>Cognoms</th>
-                    <th>Data Naixement</th>
-                    <th>Població</th>
-                    <th>CIP</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let pacient of pacients()" [routerLink]="['/pacients', pacient.dni]" style="cursor: pointer;">
-                    <td>{{ pacient.dni }}</td>
-                    <td>{{ pacient.nom }}</td>
-                    <td>{{ pacient.cognoms }}</td>
-                    <td>{{ pacient.dataNaixement }}</td>
-                    <td>{{ pacient.poblacio }}</td>
-                    <td>{{ pacient.cip }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="form-container">
+<div *ngIf="!loading" class="container ion-padding">
+
+    <ion-grid class="table-container">
+        <ion-row class="table-header">
+            <ion-col size="2">DNI</ion-col>
+            <ion-col size="2">Nom</ion-col>
+            <ion-col size="2">Cognoms</ion-col>
+            <ion-col size="2">Data Naixement</ion-col>
+            <ion-col size="2">Població</ion-col>
+            <ion-col size="2">CIP</ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let pacient of pacients()" 
+                (click)="goToPacient(pacient.dni)" 
+                class="table-pacient-row">
+        
+            <ion-col size="2">{{ pacient.dni }}</ion-col>
+            <ion-col size="2">{{ pacient.nom }}</ion-col>
+            <ion-col size="2">{{ pacient.cognoms }}</ion-col>
+            <ion-col size="2">{{ pacient.dataNaixement }}</ion-col>
+            <ion-col size="2">{{ pacient.poblacio }}</ion-col>
+            <ion-col size="2">{{ pacient.cip }}</ion-col>
+
+        </ion-row>
+    </ion-grid>
+
+    <div class="form-container ">
         <app-pacient-form
         (pacientCreated)="onPacientCreated($event)"
         (pacientCreateError)="onPacientCreateError($event)"
         ></app-pacient-form>
     </div>
 </div>
-    
+
 <ion-toast
-        [isOpen]="isToastOpen"
-        [message]="toastMessage()"
-        [duration]="5000"
-        (ionToastDidDismiss)="setOpen(false)"
-/>
+    [isOpen]="isToastOpen"
+    [message]="toastMessage()"
+    [duration]="5000"
+    (ionToastDidDismiss)="setOpen(false)"
+></ion-toast>
