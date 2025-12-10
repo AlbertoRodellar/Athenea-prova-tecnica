@@ -1,12 +1,18 @@
 FROM php:8.2-apache
 
-
-RUN apt-get update && apt-get install -y libsqlite3-dev \
+RUN apt-get update && apt-get install -y libsqlite3-dev unzip git \
     && docker-php-ext-install pdo pdo_sqlite
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && php -r "unlink('composer-setup.php');"
 
 RUN a2enmod rewrite
 
 COPY . /var/www/html/
+
+WORKDIR /var/www/html
+RUN composer install --no-dev --optimize-autoloader
 
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!/var/www/html/public/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
