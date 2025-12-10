@@ -3,12 +3,14 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    container_name: athenea_backend
     ports:
       - "8000:80"
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
       - DB_CONNECTION=sqlite
+      - APP_URL=http://localhost:8000
     networks:
       - app-network
 
@@ -16,6 +18,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    container_name: athenea_frontend
     ports:
       - "4200:80"
     networks:

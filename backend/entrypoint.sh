@@ -1,14 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
-if [ ! -f /var/www/html/database/database.sqlite ]; then
-  touch /var/www/html/database/database.sqlite
-  echo "Archivo SQLite creado"
+DB_PATH="/var/www/html/database/database.sqlite"
+if [ ! -f $DB_PATH ]; then
+  echo "=> Creando archivo SQLite..."
+  touch $DB_PATH
+  chown www-data:www-data $DB_PATH
+  chmod 664 $DB_PATH
 fi
 
-if [ ! -d /var/www/html/vendor ]; then
-  composer install --optimize-autoloader --no-dev
-fi
+sleep 5
 
-php artisan migrate:fresh --seed
+echo "=> Ejecutando migraciones y seeders..."
+su www-data -c "php /var/www/html/artisan migrate:fresh --seed --force"
 
-apache2-foreground
+echo "=> Inicialización completa."
+
+exec "$@"
