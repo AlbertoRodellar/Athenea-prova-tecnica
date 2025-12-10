@@ -1,63 +1,65 @@
 <div *ngIf="loading">Carregant detalls del pacient...</div>
 
-<div *ngIf="!loading && pacient">
+<div *ngIf="!loading && pacient" class="container ion-padding">
+    <ion-button (click)="goBack()" fill="outline" color="primary">
+        ← Enrere
+    </ion-button>
     <h2>Editar pacient amb DNI: {{ pacient.dni }}</h2>
-    <form (ngSubmit)="updatePacient()" #patientForm="ngForm">
-    <ion-list>
-        <ion-item>
-            <ion-input
-            label="Nom"
-            labelPlacement="floating"
-            name="nom"
-            [(ngModel)]="pacient.nom"
-            required
-            ></ion-input>
-        </ion-item>
+    <form (ngSubmit)="updatePacient()" #patientForm="ngForm" class="ion-margin-top ion-padding">
+        <ion-list>
+            <ion-item>
+                <ion-input
+                label="Nom"
+                labelPlacement="floating"
+                name="nom"
+                [(ngModel)]="pacient.nom"
+                required
+                ></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-input
-            label="Cognoms"
-            labelPlacement="floating"
-            name="cognoms"
-            [(ngModel)]="pacient.cognoms"
-            required
-            ></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-input
+                label="Cognoms"
+                labelPlacement="floating"
+                name="cognoms"
+                [(ngModel)]="pacient.cognoms"
+                required
+                ></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-input
-            type="date"
-            label="Data Naixement"
-            labelPlacement="floating"
-            name="dataNaixement"
-            [(ngModel)]="pacient.dataNaixement"
-            required
-            ></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-input
+                type="date"
+                label="Data Naixement"
+                labelPlacement="floating"
+                name="dataNaixement"
+                [(ngModel)]="pacient.dataNaixement"
+                required
+                ></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-input
-            label="Població"
-            labelPlacement="floating"
-            name="poblacio"
-            [(ngModel)]="pacient.poblacio"
-            required
-            ></ion-input>
-        </ion-item>
+            <ion-item>
+                <ion-input
+                label="Població"
+                labelPlacement="floating"
+                name="poblacio"
+                [(ngModel)]="pacient.poblacio"
+                required
+                ></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-input
-            label="CIP"
-            labelPlacement="floating"
-            name="cip"
-            [(ngModel)]="pacient.cip"
-            required
-            ></ion-input>
-        </ion-item>
-    </ion-list>
+            <ion-item>
+                <ion-input
+                label="CIP"
+                labelPlacement="floating"
+                name="cip"
+                [(ngModel)]="pacient.cip"
+                required
+                ></ion-input>
+            </ion-item>
+        </ion-list>
 
         <ion-button
-            expand="block"
             type="submit"
             [disabled]="patientForm.invalid"
             class="ion-margin-top"
@@ -70,10 +72,10 @@
 <div *ngIf="!loading && !pacient">
     <p>Pacient no trobat.</p> 
 </div>
-<ion-content class="ion-padding">
-    <ion-toast
-        [isOpen]="toastOpen()"
-        [message]="toastMessage()"
-        [duration]="5000"
-    />
-</ion-content>
+
+<ion-toast
+    [isOpen]="isToastOpen"
+    [message]="toastMessage()"
+    [duration]="5000"
+    (ionToastDidDismiss)="setOpen(false)"
+></ion-toast>

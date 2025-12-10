@@ -3,15 +3,13 @@ import { RouterLink } from '@angular/router';
 import { PacientService, Pacient } from '../../services/pacient.services';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { PacientForm } from '../pacient-form/pacient-form';
-import { IonContent, IonToast, IonButton, IonList, IonItem, IonInput, IonDatetime, IonLabel, IonDatetimeButton, IonModal } from '@ionic/angular/standalone';
-
-
+import { IonToast, IonList, IonItem, IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-pacient-list',
-  imports: [RouterLink, CommonModule, FormsModule, PacientForm, IonContent, IonToast, IonButton, IonList, IonItem, IonInput, IonDatetime, IonLabel, IonDatetimeButton, IonModal],
+  imports: [RouterLink, CommonModule, FormsModule, PacientForm, IonToast, IonList, IonItem, IonGrid, IonRow, IonCol],
   templateUrl: './pacient-list.html',
   styleUrl: './pacient-list.css',
 })
@@ -21,7 +19,7 @@ export class PacientList implements OnInit {
 
   
 
-  constructor(private pacientService: PacientService, private cdr: ChangeDetectorRef) {}
+  constructor(private pacientService: PacientService, private cdr: ChangeDetectorRef, private router: Router) {}
 
   ngOnInit(): void {
     this.loadPacients();
@@ -34,6 +32,10 @@ export class PacientList implements OnInit {
       this.loading = false;
       this.cdr.detectChanges();
     });
+  }
+
+  goToPacient(dni: string) {
+    this.router.navigate(['/pacients', dni]);
   }
   
   toastMessage = signal<string>('');

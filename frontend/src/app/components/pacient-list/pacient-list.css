@@ -6,10 +6,10 @@
 .table-container {
     flex: 2;
     overflow-x: auto;
-    
-    table{
-        width: 100%;
-    }
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
 }
 
 .form-container {
@@ -20,4 +20,44 @@
     .container {
         flex-direction: column;
     }
+}
+
+
+.table-header {
+    background-color: #3880ff; 
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-align: center;
+    align-items: center;
+    border-bottom: 2px solid #2551a3;
+    
+    ion-col {
+        border-right: 1px solid #2551a3;
+    }
+    ion-col:last-child {
+        border-right: none;
+    }
+}
+
+.table-pacient-row {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+
+    ion-col {
+        border-right: 1px solid #eee;
+        text-align: center;
+    }
+    ion-col:last-child {
+        border-right: none;
+    }
+}
+
+.table-pacient-row:last-child {
+    border-bottom: none;
+}
+
+.table-pacient-row:hover {
+    background-color: #1e1e1e;
+    cursor: pointer;
 }

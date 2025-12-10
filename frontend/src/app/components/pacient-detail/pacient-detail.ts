@@ -50,7 +50,11 @@ export class PacientDetail implements OnInit {
   }
 
   toastMessage = signal<string>('');
-  toastOpen = signal<boolean>(false);
+  isToastOpen = false;
+
+  setOpen(isOpen: boolean) {
+    this.isToastOpen = isOpen;
+  }
 
   updatePacient() {
     if (this.pacient) {
@@ -59,18 +63,22 @@ export class PacientDetail implements OnInit {
           this.pacient = updated;
           console.log('Pacient updated:', updated);
           this.toastMessage.set('Pacient amb DNI: ' + this.pacient.dni + ' actualitzat correctament!');
-          this.toastOpen.set(true);
+          this.setOpen(true);
           
           setTimeout(() => {
-            this.router.navigate(['/']);
+            this.goBack();
           }, 1000);
         },
         error: (err) => {
           console.error('Error actualitzant el pacient:', err);
           this.toastMessage.set('Error actualitzant el pacient');
-          this.toastOpen.set(true);
+          this.setOpen(true);
         }
       });
     }
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 }
