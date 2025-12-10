@@ -1,63 +1,51 @@
-# 🌟 Athenea Solutions - Repte tècnic
+# 🌟 Athenea Solutions - Prova tècnica
 
-Este proyecto consta de un backend en PHP (Laravel) y un frontend en Angular/Ionic. Aquí se explica cómo preparar y ejecutar el proyecto localmente.
+Aquest repositori conté el codi d'una prova tècnica estructurada en dues parts: un backend basat en Laravel (PHP) i un frontend basat en Angular (Node.js/npm).
 
----
+## 📝 Resum del Repte Enunciat
 
-## 📋 Requisitos
+L'objectiu principal del repte era crear una aplicació web full stack per a la **gestió d'un llistat de pacients**.
 
-Asegúrate de tener instalado lo siguiente antes de comenzar:
+### Funcionalitats Requerides
+* **Llistat:** Mostrar els pacients en format de taula.
+* **Perfil/Edició:** En clicar sobre un pacient, s'ha de mostrar el perfil amb les seves dades, que han de ser editables.
+* **Creació:** Formulari per afegir un nou pacient.
 
-* **Docker y Docker Compose** instalados.
-* **PHP y Composer** instalados (solo son necesarios para preparar el backend la primera vez).
-
----
-
-## 🚀 Pasos para levantar el proyecto
-
-Sigue estos pasos para configurar y ejecutar la aplicación en tu entorno local.
-
-1.  **Clonar el repositorio:**
-
-    ```bash
-    git clone https://github.com/AlbertoRodellar/Athenea-prova-tecnica
-    cd Athenea-prova-tecnica
-    ```
-
-2.  **Preparar el Backend (Solo la primera vez):**
-
-    Dirígete al directorio del backend e instala las dependencias de PHP.
-
-    ```bash
-    cd backend
-    composer install
-    ```
-
-3.  **Configurar la Base de Datos:**
-
-    Crea el archivo de base de datos **SQLite** vacío y ejecuta las migraciones junto con los *seeders* para tener datos iniciales.
-
-    ```bash
-    touch database/database.sqlite
-    php artisan migrate:fresh --seed
-    ```
-
-4.  **Levantar Contenedores Docker:**
-
-    Vuelve a la raíz del proyecto y utiliza Docker Compose para construir y levantar los servicios (backend y frontend).
-
-    ```bash
-    cd ..
-    docker compose up --build
-    ```
+### Camps dels Pacients
+* Nom
+* Cognoms
+* Data de Naixement (`dataNaixement`)
+* DNI
+* Població
+* CIP
 
 ---
 
-## 🌐 Información adicional
+## ⚠️ AVISOS IMPORTANTS (Mode d'Execució Manual)
 
-Una vez levantados los contenedores, los servicios estarán accesibles en las siguientes direcciones:
+* **Actualment, l'execució directa amb Docker Compose no funciona.**
+* Per tant, caldrà executar els serveis de *frontend* i *backend* **manualment** (amb `php artisan serve` i `npm start`) un cop s'hagi fet la configuració inicial.
 
-| Servicio | URL |
+---
+## 📸 Captures de Pantalla del Resultat
+
+Així és com es veu la pàgina web un cop els dos serveis s'estan executant correctament:
+
+### Primera Vista (Llistat de Pacients)
+
+![Llistat de pacients a la taula i formulari de creació](assets/images/capture1.png)
+
+### Segona Vista (Detalls del Pacient)
+
+![Perfil d'un pacient mostrant la seva informació en formulari d'edició](assets/images/capture1.png)
+
+---
+
+## 🌐 Informació Addicional
+
+Un cop aixecats els serveis manualment, estaran accessibles a les següents adreces:
+
+| Servei | URL |
 | :--- | :--- |
 | **Backend (Laravel)** | `http://localhost:8000` |
-| **Frontend (Angular/Ionic)** | `http://localhost:4200` |
+| **Frontend (Angular)** | `http://localhost:4200` |
