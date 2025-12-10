@@ -1,18 +1,11 @@
 FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y libsqlite3-dev unzip git \
+RUN apt-get update && apt-get install -y libsqlite3-dev zip unzip \
     && docker-php-ext-install pdo pdo_sqlite
-
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
-    && php -r "unlink('composer-setup.php');"
 
 RUN a2enmod rewrite
 
 COPY . /var/www/html/
-
-WORKDIR /var/www/html
-RUN composer install --no-dev --optimize-autoloader
 
 RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!/var/www/html/public/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
@@ -20,6 +13,9 @@ RUN sed -ri -e 's!/var/www/!/var/www/html/public/!g' /etc/apache2/apache2.conf /
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 RUN chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+ENTRYPOINT ["/entrypoint.sh"]
