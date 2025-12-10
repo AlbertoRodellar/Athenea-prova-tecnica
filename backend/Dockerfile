@@ -1,3 +1,5 @@
+# LARAVEL DOCKERFILE NOT WORKING!
+
 FROM composer:latest as composer_stage
 
 WORKDIR /app
@@ -31,7 +33,5 @@ COPY backend/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 80
-
-ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["apache2-foreground"]
