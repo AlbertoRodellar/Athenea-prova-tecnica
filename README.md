@@ -33,11 +33,11 @@ Així és com es veu la pàgina web un cop els dos serveis s'estan executant cor
 
 ### Primera Vista (Llistat de Pacients)
 
-![Llistat de pacients a la taula i formulari de creació](assets/images/capture1.png)
+<img src="assets/captura1.png" alt="Llistat de pacients a la taula i formulari de creació" width="900"/>
 
 ### Segona Vista (Detalls del Pacient)
 
-![Perfil d'un pacient mostrant la seva informació en formulari d'edició](assets/images/capture1.png)
+<img src="assets/captura2.png" alt="Perfil d'un pacient mostrant la seva informació en formulari d'edició" width="900"/>
 
 ---
 
