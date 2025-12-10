@@ -20,6 +20,19 @@ L'objectiu principal del repte era crear una aplicació web full stack per a la 
 * CIP
 
 ---
+## 💡 Decisions Tècniques Preses
+
+### 1. Elecció del Backend: Laravel i SQLite
+
+* **Framework (Laravel):** He seleccionat **Laravel (PHP)** com a *backend* principal. Aquesta decisió es basa en la meva experiència i comoditat amb el *framework*, cosa que em permet una implementació ràpida i robusta dels *endpoints* de l'API REST per a la gestió dels pacients (CRUD).
+* **Base de Dades (SQLite):** He optat per **SQLite** com a base de dades. Donat que el repte només requeria la gestió d'una única taula de pacients amb un CRUD bàsic, vaig considerar que una base de dades més complexa com MySQL o PostgreSQL no era necessària.
+
+### 2. Elecció del Frontend: Angular amb Ionic
+
+* **Angular (Frontend):** He utilitzat el *framework* **Angular** per a la part client.
+* **Aportació de Valor amb Ionic:** Tot i la meva falta d'experiència prèvia específica amb Angular i Ionic, he decidit integrar el *framework* **Ionic** en la capa de presentació. Aquesta decisió l'he presa intencionadament ja que, considerant que Ionic és una tecnologia d'ús freqüent en aquesta empresa, he volgut alinear la solució a les vostres eines.
+
+---
 
 ## ⚠️ AVISOS IMPORTANTS (Mode d'Execució Manual)
 
