@@ -62,9 +62,17 @@
         <ion-button
             type="submit"
             [disabled]="patientForm.invalid"
-            class="ion-margin-top"
+            class="ion-margin-top ion-margin-end"
             >
             Guardar
+        </ion-button>
+        <ion-button
+            type="button"
+            color="danger"
+            class="ion-margin-top ion-margin-start"
+            (click)="deletePacient()"
+            >
+            Eliminar Pacient
         </ion-button>
     </form>
 </div>

@@ -81,4 +81,25 @@ export class PacientDetail implements OnInit {
   goBack() {
     this.router.navigate(['/']);
   }
+
+  deletePacient() {
+    if (this.pacient) {
+      this.pacientService.deletePacient(this.pacient.dni).subscribe({
+        next: () => {
+          console.log('Pacient deleted');
+          this.toastMessage.set('Pacient amb DNI: ' + this.pacient!.dni + ' eliminat correctament!');
+          this.setOpen(true);
+          setTimeout(() => {
+            this.goBack();
+          }, 1000);
+        }
+        ,
+        error: (err) => {
+          console.error('Error eliminant el pacient:', err);
+          this.toastMessage.set('Error eliminant el pacient');
+          this.setOpen(true);
+        }
+      });
+    }
+  }
 }
